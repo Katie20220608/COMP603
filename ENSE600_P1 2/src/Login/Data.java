@@ -12,5 +12,7 @@ public class Data {
     
     boolean loginFlag = false;
     boolean hasAnAccount = false;
+    boolean quitFlag = false;
+    boolean createNewAccDone = false;
     
 }

@@ -10,9 +10,9 @@ package Login;
  */
 public class Main {
     public static void main(String[] args){
-        LoginView lgView = new LoginView();
-        
-    
-    }
-    
+        LoginView view = new LoginView();
+        Model model = new Model();
+        Controller controller = new Controller(view, model);
+        model.addObserver(view);
+    } 
 }
