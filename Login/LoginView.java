@@ -5,6 +5,8 @@
 package Login;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.Observer;
@@ -20,78 +22,217 @@ import javax.swing.JTextField;
  */
 public class LoginView extends JFrame implements Observer  {
     
-    private JPanel userPanel = new JPanel();
-    private JPanel loginPanel = new JPanel();
-    //private JLabel uName = new JLabel("Username: ");
-    //private JLabel pWord = new JLabel("Password: ");
-    //public JTextField unInput = new JTextField(10);
-    //public JTextField pwInput = new JTextField(10);
-    private JLabel wrongName = new JLabel("Wrong username or passwork!");
-    //private JButton loginButton = new JButton("Log in");
+   
+    private JPanel userPanel1 = new JPanel();
+    private JPanel userPanel2 = new JPanel();
     
-    public JLabel welcomeMessage = new JLabel ("-------------Welcome to ENSE600/COMP603 Q & A App-------------", JLabel.CENTER);
-    public JLabel queryMessage = new JLabel("-------------Have you already got an account?-------------",JLabel.CENTER);
+    private JPanel loginPanel1 = new JPanel();
+    private JPanel loginPanel2 = new JPanel();
+    private JPanel createAccPanel = new JPanel();
+    private JPanel resetPasswordPanel = new JPanel();
+    
+    private JPanel QAMenu1 = new JPanel();
+    private JPanel QAMenu2 = new JPanel();
+    
+    
+    public JLabel queryMessage = new JLabel("Have you already got an account?",JLabel.CENTER);
     private JLabel yes = new JLabel("Yes, I want to log in with my account.");
-    private JButton yesButton = new JButton("Login now");
+    private JButton yesButton = new JButton("Log in Now");
     private JLabel no = new JLabel("No, I want to create a new account.");
     private JButton noButton = new JButton("Create New Account");
+    
+    private JButton quitButton = new JButton("Quit");
+    private JButton backButton = new JButton("Back");
+    
+    
+    private JLabel uID = new JLabel("User ID: ");
+    private JLabel pWord = new JLabel("Password: ");
+    public JTextField uidInput = new JTextField(10);
+    public JTextField pwInput = new JTextField(10);
+    private JLabel wrongName = new JLabel();
+    private JButton loginButton = new JButton("Log in");
+    
+    private JLabel inputId = new JLabel("Please input a user ID: ");
+    private JLabel inputName = new JLabel("Please input your name: ");
+    private JLabel inputPassword = new JLabel("Please input your password: ");
+    public JTextField newUserId = new JTextField(11);
+    public JTextField newUserName = new JTextField(11);
+    public JTextField newUserPassword = new JTextField(11);
+    private JButton createNewAccButton = new JButton("Create New Account");
+    private JButton registerButton = new JButton("Register");
+    
+    private JLabel resetMessage = new JLabel("Please input your user ID:");
+    public JTextField inputUserID = new JTextField(10);
+    private JLabel resetPassword = new JLabel("Please input your new password:");
+    public JTextField newInputPassword = new JTextField(10);
+    private JButton resetPasswordButton = new JButton("Reset Password");
+    private JButton submitButton = new JButton("Submit");
+    
+    
+    private JLabel welcomMessage = null;
+    private JLabel questionMenu = new JLabel("Would you like to... ");
+    private JButton askQuestion = new JButton("Ask a new question");
+    private JButton browseQuestions = new JButton("Browse all questions");
+    private JButton browseQuesByTopic = new JButton("Browse questions by topic");
+    private JButton answerQuestions = new JButton("Answer unanswered questions");
+    
    
     public LoginView(){
+        super("-------------Welcome to ENSE600/COMP603 Q & A App-------------");
         
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(800,200);
+        this.setSize(1000,200);
         
-        //this.userPanel.add(uName);
-        //this.userPanel.add(unInput);
-        //this.userPanel.add(pWord);
-        //this.userPanel.add(pwInput);
-        //this.userPanel.add(loginButton);
-        
-        this.add(this.welcomeMessage,BorderLayout.SOUTH);
         this.add(this.queryMessage,BorderLayout.NORTH);
+        this.queryMessage.setFont(new Font("Serif",Font.ITALIC,18));
         
-        this.userPanel.add(yes);
+        this.userPanel1.add(yes);
+        this.userPanel1.add(yesButton);
+        this.userPanel2.add(no);
+        this.userPanel2.add(noButton);
+        this.userPanel2.add(quitButton);
+        this.quitButton.setForeground(Color.red);
         
-        this.userPanel.add(yesButton);
-        this.userPanel.add(no);
-        this.userPanel.add(noButton);
-        
-        this.add(userPanel);
+        this.add(userPanel1,BorderLayout.CENTER);
+        this.add(userPanel2,BorderLayout.SOUTH);
         this.setVisible(true);
     
+    }
+    
+    public void loginAccount(){
+        loginPanel1.add(uID);
+        loginPanel1.add(uidInput);
+        loginPanel1.add(pWord);
+        loginPanel1.add(pwInput);
+        loginPanel2.add(loginButton);
+        loginPanel2.add(quitButton);
+        this.quitButton.setForeground(Color.red);
+        loginPanel2.add(resetPasswordButton);
+        loginPanel2.add(createNewAccButton);
+        
+        this.getContentPane().removeAll();
+        loginPanel1.setVisible(true);
+        loginPanel2.setVisible(true);
+        
+        this.add(loginPanel1,BorderLayout.CENTER);
+        this.add(loginPanel2,BorderLayout.SOUTH);
+        this.revalidate();
+        this.repaint();
+        
+    }
+    public void createAnAccount() {
+        createAccPanel.add(inputId);
+        createAccPanel.add(newUserId);
+        createAccPanel.add(inputName);
+        createAccPanel.add(newUserName);
+        createAccPanel.add(inputPassword);
+        createAccPanel.add(newUserPassword);
+        createAccPanel.add(registerButton);
+        createAccPanel.add(quitButton);
+        this.quitButton.setForeground(Color.red);
+        
+        this.getContentPane().removeAll();
+        createAccPanel.setVisible(true);
+        this.add(createAccPanel);
+        this.revalidate();
+        this.repaint();
+        
+    }
+    public void resetPassword(){
+        resetPasswordPanel.add(resetMessage);
+        resetPasswordPanel.add(inputUserID);
+        resetPasswordPanel.add(resetPassword);
+        resetPasswordPanel.add(newInputPassword);
+        resetPasswordPanel.add(submitButton);
+        
+        this.getContentPane().removeAll();
+        resetPasswordPanel.setVisible(true);
+        this.add(resetPasswordPanel);
+        this.revalidate();
+        this.repaint();
+                   
+    }
+    
+    public void printQuestionMenu(){
+        QAMenu1.add(welcomMessage,BorderLayout.NORTH);
+        QAMenu1.add(questionMenu,BorderLayout.CENTER);
+        QAMenu2.add(askQuestion);
+        QAMenu2.add(browseQuestions);
+        QAMenu2.add(browseQuesByTopic);
+        QAMenu2.add(answerQuestions);
+        QAMenu2.add(quitButton);
+        this.quitButton.setForeground(Color.red);
+        
+        this.getContentPane().removeAll();
+        QAMenu1.setVisible(true);
+        QAMenu2.setVisible(true);
+        this.add(QAMenu1,BorderLayout.CENTER);
+        this.add(QAMenu2,BorderLayout.SOUTH);
+        this.revalidate();
+        this.repaint(); 
+        
     }
     
     public void addActionListener(ActionListener listener) {
         this.yesButton.addActionListener(listener);
         this.noButton.addActionListener(listener);
-        //this.loginButton.addActionListener(listener);
-        
-        
+        this.loginButton.addActionListener(listener);
+        this.quitButton.addActionListener(listener);
+        this.backButton.addActionListener(listener);
+        this.createNewAccButton.addActionListener(listener);
+        this.registerButton.addActionListener(listener);
+        this.resetPasswordButton.addActionListener(listener);
+        this.submitButton.addActionListener(listener);
     }
     
-
+    public void quitSystem(){
+        JPanel quitPanel = new JPanel();
+        JLabel goodbye = new JLabel("Goodbye! See you next time!");
+        goodbye.setFont(new Font("Serif",Font.ITALIC,16));
+        quitPanel.add(goodbye,BorderLayout.AFTER_LAST_LINE);
+        this.getContentPane().removeAll();
+        
+        this.add(quitPanel);
+        this.revalidate();
+        this.repaint(); 
+    }
+    
+    public void goBackToQAMenu() {
+        this.printQuestionMenu();
+   
+    }
+    
     @Override
     public void update(Observable o, Object arg) {
         Data data = (Data) arg;
+        welcomMessage = new JLabel("Kia ora, "+ data.username + "! You have logged in successfully.");
         if(!data.hasAnAccount){
-            this.login();
-            
+            this.loginAccount();
+            if(data.loginFlag== true){
+            this.printQuestionMenu();
+            }else{
+                this.loginAccount();
+            }
         }else if(data.hasAnAccount){
             this.createAnAccount();
-            
-        }else if(!data.loginFlag){
-            //this.unInput.setText("");
-            //this.pwInput.setText("");
-            this.welcomeMessage.setText("Invalid username or password.");
+            if(data.accountExist){
+                data.createNewAccDone =true;
+            }
         }
-    }
-
-    private void createAnAccount() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    private void login() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-     
+        else if(!data.quitFlag){
+            this.quitSystem();
+            
+        }else if(data.resetPasswordDone){
+           this.resetPassword();
+           data.loginFlag = false;
+        }
+        else if(data.accountExist){
+            this.createAnAccount();
+            data.hasAnAccount = true;
+        }
+        else if(!data.accountExist){
+            this.resetPassword();
+            
+        }
+    }      
 }
