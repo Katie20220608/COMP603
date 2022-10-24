@@ -6,6 +6,7 @@ package Login;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -36,9 +37,12 @@ public class Controller implements ActionListener {
             case "Log in":
                 String userID = this.view.uidInput.getText();
                 String password = this.view.pwInput.getText();
-                this.model.checkName(userID, password);
+                this.model.db.loginAcc(userID, password);
+                System.out.println(this.model.data.isAdmin);
+                this.model.loginAcc(userID, password);
+                System.out.println(this.model.data.isAdmin);
                 break;
-                
+
             case "Quit":
                 this.view.quitSystem();
                 break;
@@ -47,7 +51,17 @@ public class Controller implements ActionListener {
                 String newUserID = this.view.newUserId.getText().trim();
                 String newUserName = this.view.newUserName.getText().trim();
                 String newUserPassword = this.view.newUserPassword.getText().trim();
-                this.model.createNewAcc(newUserID, newUserName, newUserPassword);
+                if(newUserID.isEmpty()||newUserName.isEmpty()||newUserPassword.isEmpty()){
+                    JOptionPane.showMessageDialog(null, "Invalid input!");
+                }else if(newUserID.length()>30){
+                    JOptionPane.showMessageDialog(null, "You input information exceeds maximum allowed characters (30)");
+                }else if(newUserName.length()>30){
+                    JOptionPane.showMessageDialog(null, "You input information exceeds maximum allowed characters (30)");
+                }else if(newUserPassword.length()>30){
+                    JOptionPane.showMessageDialog(null, "You input information exceeds maximum allowed characters (30)");
+                }else{
+                    this.model.createNewAcc(newUserID, newUserName, newUserPassword);
+                }
                 break;
                 
             case "Reset Password":
@@ -58,6 +72,15 @@ public class Controller implements ActionListener {
                 String inputID = this.view.inputUserID.getText().trim();
                 String newPassword = this.view.newInputPassword.getText().trim();
                 this.model.resetPassword(inputID,newPassword);
+                break;
+                
+            case "Delete an account":
+                this.view.deleteAcc();
+                break;
+                
+            case "Delete":
+                String deleteID = this.view.inputUserID.getText().trim();
+                this.model.deleteAcc(deleteID);
                 break;
                 
             case "Back":

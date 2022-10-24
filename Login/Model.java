@@ -22,13 +22,20 @@ public class Model extends Observable{
         
     }
 
-    public void checkName(String userID, String password) {
+    public void loginAcc(String userID, String password) {
         this.userID = userID;
-        this.data = this.db.checkName(userID, password);
-        
+        this.data = this.db.loginAcc(userID, password);
+        data.isAdmin = false;
         this.setChanged();
         this.notifyObservers(this.data);
     }
+    
+//    public void loginAsAdmin(String userID){
+//        this.userID = userID;
+//        this.data = this.db.loginAsAdmin(userID);
+//        this.setChanged();
+//        this.notifyObservers(this.data);
+//    }
     
     public void createNewAcc(String userID, String userName, String password){
         this.userID = userID;
@@ -43,6 +50,13 @@ public class Model extends Observable{
         this.db.resetPassword(userID, newPassword);
         this.setChanged();
         this.notifyObservers(this.data);  
+    }
+    
+    public void deleteAcc(String userID){
+        this.userID = userID;
+        this.db.deleteAcc(userID);
+        this.setChanged();
+        this.notifyObservers(this.data);
     
     }
     

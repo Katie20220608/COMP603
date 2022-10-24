@@ -16,5 +16,7 @@ public class Data {
     boolean createNewAccDone = false;
     boolean resetPasswordDone = false;
     boolean accountExist = false;
+    boolean deleteAccDone = false;
+    boolean isAdmin = false;
     String username = "";
 }
