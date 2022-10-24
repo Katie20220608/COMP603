@@ -6,13 +6,14 @@ package Login;
 
 /**
  *
- * @author yueli
+ * @author Katie LI
+ *@Student ID:18003055
  */
 public class Main {
     public static void main(String[] args){
-        LoginView lgView = new LoginView();
-        
-    
-    }
-    
+        LoginView view = new LoginView();
+        Model model = new Model();
+        Controller controller = new Controller(view, model);
+        model.addObserver(view);// Build connection between the view and the model.
+    } 
 }
