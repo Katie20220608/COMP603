@@ -45,9 +45,9 @@ public class LoginView extends JFrame implements Observer  {
     
     private JPanel quitPanel = new JPanel();
     private JButton quitButton = new JButton("Quit");
-    private JLabel goodbye = null;
+    private JLabel goodbye =  new JLabel("Goodbye! See you next time!");
     
-    private JButton backButton = new JButton("Back");
+    private JButton backButton = new JButton("Back to Login");
     
     private JLabel uID = new JLabel("User ID: ");
     private JLabel pWord = new JLabel("Password: ");
@@ -137,6 +137,7 @@ public class LoginView extends JFrame implements Observer  {
         createAccPanel1.add(newUserPassword);
         createAccPanel1.add(registerButton);
         createAccPanel1.add(quitButton);
+        createAccPanel1.add(backButton);
         this.quitButton.setForeground(Color.red);
         createAccPanel2.add(remindMsgForNewAcc);
         this.remindMsgForNewAcc.setFont(new Font("Serif",Font.ITALIC,18));
@@ -157,6 +158,8 @@ public class LoginView extends JFrame implements Observer  {
         resetPasswordPanel.add(resetPassword);
         resetPasswordPanel.add(newInputPassword);
         resetPasswordPanel.add(submitButton);
+        resetPasswordPanel.add(quitButton);
+        resetPasswordPanel.add(backButton);
         
         this.getContentPane().removeAll();
         resetPasswordPanel.setVisible(true);
@@ -195,6 +198,7 @@ public class LoginView extends JFrame implements Observer  {
         deleteAccPanel.add(deleteButton);
         deleteAccPanel.add(quitButton);
         deleteAccPanel.add(backButton);
+       
         
         this.getContentPane().removeAll();
         deleteAccPanel.setVisible(true);
@@ -248,8 +252,8 @@ public class LoginView extends JFrame implements Observer  {
         this.repaint(); 
     }
     
-    public void goBackToQAMenu() {
-        this.printQuestionMenu();
+    public void goBacktoLogin() {
+        this.loginAccount();
    
     }
     
@@ -258,7 +262,7 @@ public class LoginView extends JFrame implements Observer  {
     public void update(Observable o, Object arg) {
         Data data = (Data) arg;
         welcomMessage = new JLabel("Kia ora, "+ data.username + "! You have logged in successfully.");
-        goodbye = new JLabel("Goodbye, "+data.username+"! See you next time!");
+       
         if(!data.hasAnAccount){//if the user has an account, to the login window
             this.loginAccount();
             if(data.loginFlag == true){//if the user ID and password matching the information in db then go to the QAMenu window

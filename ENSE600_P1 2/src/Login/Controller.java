@@ -85,8 +85,8 @@ public class Controller implements ActionListener {
                 this.model.deleteAcc(deleteID);
                 break;
                 
-            case "Back":
-                this.view.goBackToQAMenu();
+            case "Back to Login":
+                this.view. goBacktoLogin();
                 break;
                 
             default:
