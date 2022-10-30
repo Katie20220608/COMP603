@@ -20,7 +20,6 @@ import javax.swing.JTextField;
 public class LoginView extends JFrame implements Observer {
 
     // initilizing the GUI instance of variables
-   
     private JPanel userPanel1 = new JPanel();
     private JPanel userPanel2 = new JPanel();
     public JLabel queryMessage = new JLabel("Have you already got an account?", JLabel.CENTER);
@@ -86,7 +85,6 @@ public class LoginView extends JFrame implements Observer {
         this.add(userPanel1, BorderLayout.CENTER);
         this.add(userPanel2, BorderLayout.SOUTH);
         this.setVisible(true);
-
     }
 
     public void loginAccount() {
@@ -133,7 +131,6 @@ public class LoginView extends JFrame implements Observer {
         this.add(createAccPanel2, BorderLayout.SOUTH);
         this.revalidate();
         this.repaint();
-
     }
 
     public void resetPassword() {
@@ -158,7 +155,6 @@ public class LoginView extends JFrame implements Observer {
         this.dispose();
     }
 
-
     public void printQuestionMenu() {
         new QnaMenuView(m);
         this.dispose();
@@ -174,7 +170,6 @@ public class LoginView extends JFrame implements Observer {
         this.registerButton.addActionListener(listener);
         this.resetPasswordButton.addActionListener(listener);
         this.submitButton.addActionListener(listener);
-       
     }
 
     public void quitSystem() {
@@ -205,17 +200,11 @@ public class LoginView extends JFrame implements Observer {
                 } else {//after login, if the user is recogized as Admin, go to the Admin Menu window
                     this.loginAsAdmin();
                 }
-            } else {//if the user ID and password did not match with the db, back to the login window
-                this.loginAccount();
+            }else{//otherwise it will go back to the first page
+                this.goBacktoMenu();
             }
-        } else if (data.hasAnAccount) {//if the user does not have account, go to the createAnAccount window
-            this.createAnAccount();
-            if (!data.accountExist) {//change the value of the createNewAccDone back to Data
-                data.createNewAccDone = true;
-            } else {
-                data.createNewAccDone = false;
-            }
-        } else if (!data.quitFlag) {//if the user press the quit button, go to the quite window
+        }
+        else if (!data.quitFlag) {//if the user press the quit button, go to the quite window
             this.quitSystem();
         } else if (data.resetPasswordDone) {//go to the the reset window
             this.resetPassword();
@@ -225,6 +214,6 @@ public class LoginView extends JFrame implements Observer {
             data.hasAnAccount = true;
         } else if (!data.accountExist) {//go to the resetPassword window
             this.resetPassword();
-        }
+        } 
     }
 }
